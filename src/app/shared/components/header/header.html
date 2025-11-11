@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Schedule</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="home">Home</a>
+                </li>
+
+                <li class="nav-item" ngbDropdown>
+					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdownManagement" role="button"> Management </a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdownManagement" class="dropdown-menu">
+						<a ngbDropdownItem (click)="$event.preventDefault()" routerLink="area">Area</a>
+						<a ngbDropdownItem (click)="$event.preventDefault()" routerLink="professional">Professional</a>
+						<a ngbDropdownItem (click)="$event.preventDefault()" routerLink="appointment-type">Appointment Type</a>
+                        <hr class="dropdown-divider">
+                        <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="client">Client</a>
+                        <hr class="dropdown-divider">
+                        <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="user">User</a>
+					</div>
+				</li>
+
+                <li class="nav-item" ngbDropdown>
+					<a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdownSchedule" role="button"> Appointment </a>
+					<div ngbDropdownMenu aria-labelledby="navbarDropdownSchedule" class="dropdown-menu">
+						<a ngbDropdownItem (click)="$event.preventDefault()" routerLink="today-appointments">Today</a>
+						<a ngbDropdownItem (click)="$event.preventDefault()" routerLink="create-appointment">Schedule</a>
+						<a ngbDropdownItem (click)="$event.preventDefault()" routerLink="cancel-appointment">Cancel</a>
+                        <hr class="dropdown-divider">
+                        <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="client-history">Client's History</a>
+                        <hr class="dropdown-divider">
+                        <a ngbDropdownItem (click)="$event.preventDefault()" routerLink="professional-workdays">Professional's Schedule</a>
+					</div>
+				</li>
+
+            </ul>
+            <div class="d-flex" role="logout">
+                <div class="my-auto me-4">
+                    <span class="fw-bold me-2">{{getRealName()}}</span>
+                    @if (isAdmin()){
+                        <span>(admin)</span>
+                    }
+                </div>
+                <button class="btn btn-outline-secondary" type="submit" (click)="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+</nav>
