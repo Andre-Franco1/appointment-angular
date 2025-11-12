@@ -55,12 +55,6 @@
       "phone": "(84) 4453-2553"
     },
     {
-      "id": 10,
-      "name": "Zamora Galloway",
-      "dateOfBirth": "2025-05-16",
-      "phone": "(92) 7559-3804"
-    },
-    {
       "id": 11,
       "name": "Beck Downs",
       "dateOfBirth": "2020-12-22",
@@ -251,12 +245,6 @@
       "name": "Kristin Mcknight",
       "dateOfBirth": "2022-06-14",
       "phone": "(95) 2455-3370"
-    },
-    {
-      "id": 43,
-      "name": "Adkins Alston Tyrone",
-      "phone": "(86) 9421-2331",
-      "dateOfBirth": "2023-02-14"
     },
     {
       "id": 44,
@@ -599,12 +587,6 @@
       "name": "Carole Wynn",
       "dateOfBirth": "2024-05-03",
       "phone": "(81) 4536-2445"
-    },
-    {
-      "id": 101,
-      "name": "ZZtop",
-      "phone": "1231231",
-      "dateOfBirth": "2025-11-04"
     }
   ]
 }

@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Page } from '../../../../core/models/page';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from "@angular/router";
+import { ToastService } from '../../../../core/services/toast';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { RouterLink } from "@angular/router";
 })
 export class ClientsTablePageComponent implements OnInit {
 
-  constructor(private clientService: ClientService){}
+  constructor(private clientService: ClientService, private toastService: ToastService){}
 
   clientPage: Page<Client> = {} as Page<Client>;
   page = 1;
@@ -47,10 +48,11 @@ export class ClientsTablePageComponent implements OnInit {
   delete(client: Client){
     this.clientService.delete(client).subscribe({
       next: () => {
+        this.toastService.show(`${client.name} successfully deleted!`, 'bg-success text-light');
         this.loadClients();
       },
       error: () => {
-        alert("Error during client removal");
+        this.toastService.show('There was an error while deleting', 'bg-danger text-light');
       }
     });
   }
