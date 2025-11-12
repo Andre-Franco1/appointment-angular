@@ -30,7 +30,7 @@
                 <td><a routerLink="/client-form/{{client.id}}">{{client.name}}</a></td>
                 <td>{{client.phone}}</td>
                 <td>{{client.dateOfBirth | date:'MM-dd-yyyy' }}</td>
-                <td (click)="delete(client)">
+                <td (click)="delete(client, modalConfirm)">
                     <img src="assets/svg/trash3-fill.svg" width="20" height="20" alt="next">
                 </td>
             </tr>
@@ -42,3 +42,11 @@
 
     </div>
 </div>
+
+<app-modal #modalConfirm [title]="'Do you want to delete client?'">
+    @if (selectedClient){
+        <ng-container>
+            Name: <span class="fw-bold me-1">{{selectedClient.name}}</span>
+        </ng-container>
+    }
+</app-modal>
