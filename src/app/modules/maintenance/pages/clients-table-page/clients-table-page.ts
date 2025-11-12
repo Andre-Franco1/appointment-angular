@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Page } from '../../../../core/models/page';
 import { DatePipe } from '@angular/common';
+import { RouterLink } from "@angular/router";
 
 
 @Component({
   selector: 'app-clients-table-page',
-  imports: [FormsModule, NgbModule, DatePipe],
+  imports: [FormsModule, NgbModule, DatePipe, RouterLink],
   templateUrl: './clients-table-page.html',
   styleUrl: './clients-table-page.css',
 })

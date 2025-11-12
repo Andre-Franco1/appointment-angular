@@ -4,7 +4,7 @@
     </div>
     <div class="border rounded shadow-sm p-4">
         <div class="text-end">
-            
+            <a routerLink="/client-form" class="btn btn-primary">New</a>
         </div>
         <table class="table table-striped">
         <thead>
@@ -27,7 +27,7 @@
             @for (client of clientPage.content; track client.id){
             <tr>
                 <th scope="row">{{client.id}}</th>
-                <td><a href="">{{client.name}}</a></td>
+                <td><a routerLink="/client-form/{{client.id}}">{{client.name}}</a></td>
                 <td>{{client.phone}}</td>
                 <td>{{client.dateOfBirth | date:'MM-dd-yyyy' }}</td>
                 <td (click)="delete(client)">
