@@ -1,4 +1,19 @@
 {
+  "areas":[
+    {"id": 1, "name": "General Practitioner"},
+    {"id": 2, "name": "Physical Therapist"},
+    {"id": 3, "name": "Cardiologist"}
+  ],
+  "professionals":[
+    {"id": 1, "name":"Dr. Andrew Miller", "phone": "+1 202-555-0147", "active": true, "areaId": 1},
+    {"id": 2, "name":"Dr. Sarah Johnson", "phone": "+1 202-555-0183", "active": true, "areaId": 2},
+    {"id": 3, "name":"Dr. Mark Peterson", "phone": "+1 202-555-0126", "active": false, "areaId": 2}
+  ],
+  "appointment-types":[
+    {"id": 1, "type": "Private"},
+    {"id": 2, "type": "Insurance SMB"},
+    {"id": 3, "type": "Insurance FHS"}
+  ],
   "clients": [
     {
       "id": 1,
@@ -53,6 +68,12 @@
       "name": "Katharine Floyd",
       "dateOfBirth": "2016-05-05",
       "phone": "(84) 4453-2553"
+    },
+    {
+      "id": 10,
+      "name": "Zamora Galloway",
+      "dateOfBirth": "2025-05-16",
+      "phone": "(92) 7559-3804"
     },
     {
       "id": 11,
@@ -245,6 +266,12 @@
       "name": "Kristin Mcknight",
       "dateOfBirth": "2022-06-14",
       "phone": "(95) 2455-3370"
+    },
+    {
+      "id": 43,
+      "name": "Adkins Alston",
+      "dateOfBirth": "2023-03-14",
+      "phone": "(86) 9421-2332"
     },
     {
       "id": 44,

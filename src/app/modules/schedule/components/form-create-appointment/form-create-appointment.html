@@ -1,0 +1,74 @@
+<form [formGroup]="appointmentForm" #ngAppointmentForm="ngForm">
+    <div class="mb-3">
+        Choose an Area:
+        <select class="form-select" aria-label="Select an Area" formControlName="area" (change)="onAreaChanged()">
+            @for(area of areas; track area.id){
+                <option [ngValue]="area">{{area.name}}</option>
+            }
+        </select>
+        @if (submitted){
+        <div class="text-danger text-start">
+            @if (afArea?.errors?.['required']) {
+                <small><sup>*</sup>Select a professional's area!</small>
+            }
+        </div>
+        }
+    </div>
+
+    <div class="mb-3">
+        Choose a Professional:
+        <select class="form-select" aria-label="Select a Professional" formControlName="professional">
+            @for(professional of professionals; track professional.id){
+                <option [ngValue]="professional">{{professional.name}}</option>
+            }
+        </select>
+        @if (submitted){
+        <div class="text-danger text-start">
+            @if (afProfessional?.errors?.['required']) {
+                <small><sup>*</sup>Select a professional!</small>
+            }
+        </div>
+        }
+    </div>
+
+    <div class="mb-3">
+        Choose an appointment Type:
+        <select class="form-select" aria-label="Select an Appointment Type" formControlName="appointmentType">
+            @for(appointmentType of appointmentTypes; track appointmentType.id){
+                <option [ngValue]="appointmentType">{{appointmentType.type}}</option>
+            }
+        </select>
+        @if (submitted){
+        <div class="text-danger text-start">
+            @if (afAppointmentType?.errors?.['required']) {
+                <small><sup>*</sup>Select an appointment type!</small>
+            }
+        </div>
+        }
+    </div>
+
+    <div class="mb-3">
+        Create or type a client name:
+        <div class="input-group">
+            <input id="typeahead-basic" type="text" class="form-control" formControlName="client" [ngbTypeahead]="searchClients" [resultFormatter]="formatter" [inputFormatter]="formatter"/>
+        </div>
+        @if (getSelectedClient().phone) {
+        <div class="text-start">
+            <small>Confirm the client's phone number: {{getSelectedClient().phone}}</small>
+        </div>
+        }
+        @if (submitted){
+        <div class="text-danger text-start">
+            @if (afClient?.errors?.['required']) {
+                <small><sup>*</sup>Select a client!</small>
+            }
+        </div>
+        }
+    </div>
+
+    <div class="mb-3">
+        Comments:
+        <textarea class="form-control" id="comments" formControlName="comments"></textarea>
+    </div>
+
+</form>

@@ -12,9 +12,14 @@ export class ClientService {
 
   constructor(private http: HttpClient) { }
 
-  getClients(clientNameFilter: string, page: number):Observable<HttpResponse<Client[]>>{
+  getClientsPage(clientNameFilter: string, page: number):Observable<HttpResponse<Client[]>>{
     let url = `${this.baseUrl}?name_like=${clientNameFilter}&_page=${page}&_sort=name`;
     return this.http.get<Client[]>(url, {observe: 'response'});
+  }
+
+  getClientsByName(clientNameFilter: string):Observable<Client[]>{
+    let url = `${this.baseUrl}?name_like=${clientNameFilter}&_limit=10`;
+    return this.http.get<Client[]>(url);
   }
 
   delete(client: Client):Observable<void>{
