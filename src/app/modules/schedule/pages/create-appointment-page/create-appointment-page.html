@@ -1,1 +1,18 @@
-<p>create-appointment-page works!</p>
+<div class="container text-center">
+    <div class="row">
+        <div class="display-6 my-2">Create an Appointment:</div>
+        <div class="col-6 border rounded shadow-sm p-4">
+            <app-form-create-appointment [areas]="areas" [professionals]="professionalsByArea"
+                [appointmentTypes]="appointmentTypes" [searchClients]="searchClients"
+                (selectedAreaEvent)="onSelectedArea($event)"></app-form-create-appointment>
+        </div>
+        <div class="col-6 border rounded shadow-sm p-4">
+            <div id="calendar"></div>
+            <div id="time"></div>
+        </div>
+    </div>
+    <div class="d-grid gap-2 mt-2 px-5">
+        <button type="button" class="btn btn-primary shadow-sm" type="button" data-bs-toggle="modal"
+            data-bs-target="#confirmModal" (click)="createAppointment()">Create Appointment</button>
+    </div>
+</div>
