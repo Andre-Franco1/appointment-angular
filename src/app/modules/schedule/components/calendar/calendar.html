@@ -1,0 +1,54 @@
+<div class="calendar">
+    <div class="row">
+        <div class="col" [ngClass]="{'previous-month':showPreviousMonth()}" (click)="onPreviousMonth()">
+            @if (showPreviousMonth()){
+                <img src="assets/svg/caret-left-fill.svg" width="20" height="20" alt="previous">   
+            }
+        </div>
+        <div class="col month-year">
+            {{calendarMonth | date : 'MMMM': 'pt-BR' | titlecase}}/{{calendarMonth.getFullYear()}}
+        </div>
+        <div class="col next-month" (click)="onNextMonth()">
+            <img src="assets/svg/caret-right-fill.svg" width="20" height="20" alt="next">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col week-day">
+            Mo
+        </div>
+        <div class="col week-day">
+            Tu
+        </div>
+        <div class="col week-day">
+            We
+        </div>
+        <div class="col week-day">
+            Th
+        </div>
+        <div class="col week-day">
+            Fr
+        </div>
+        <div class="col week-day">
+            Sa
+        </div>
+        <div class="col week-day">
+            Su
+        </div>
+    </div>
+
+    @for(row of [0,1,2,3,4,5]; track row){
+    <div class="row">
+        @for(dayOfMonth of days.slice(row*7,(row+1)*7); track $index){
+        <div class="col day" [ngClass]="{
+            'day-off': !dayOfMonth.available && dayOfMonth.day,
+            'day-available': dayOfMonth.available && dayOfMonth.day,
+            'day-selected': dayOfMonth.day == selectedDay
+        }" (click)="dayOfMonth.available && onSelectedDay(dayOfMonth.day)">
+            {{dayOfMonth.day || "&nbsp;"}}
+        </div>
+        }
+    </div>
+    }
+    
+</div>
