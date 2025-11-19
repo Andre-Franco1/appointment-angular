@@ -17,7 +17,7 @@
 
     <div class="mb-3">
         Choose a Professional:
-        <select class="form-select" aria-label="Select a Professional" formControlName="professional">
+        <select class="form-select" aria-label="Select a Professional" formControlName="professional" (change)="onProfessionalChanged()">
             @for(professional of professionals; track professional.id){
                 <option [ngValue]="professional">{{professional.name}}</option>
             }

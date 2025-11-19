@@ -8,21 +8,28 @@ import { AppointmentTypeService } from '../../../../core/services/appointment-ty
 import { ClientService } from '../../../../core/services/client';
 import { debounceTime, distinctUntilChanged, filter, Observable, switchMap } from 'rxjs';
 import { Client } from '../../../../core/models/client';
+import { CalendarComponent } from "../../components/calendar/calendar";
+import { ProfessionalService } from '../../../../core/services/professional';
 
 @Component({
   selector: 'app-create-appointment-page',
   standalone: true,
-  imports: [FormCreateAppointmentComponent],
+  imports: [FormCreateAppointmentComponent, CalendarComponent],
   templateUrl: './create-appointment-page.html',
   styleUrl: './create-appointment-page.css',
 })
 export class CreateAppointmentPageComponent implements OnInit{
 
-  constructor(private areaService: AreaService, private appointmentTypeService: AppointmentTypeService, private clientService: ClientService){}
+  constructor(private areaService: AreaService, private appointmentTypeService: AppointmentTypeService, private clientService: ClientService, private professionalService: ProfessionalService){}
 
   areas: Area[] = [];
   professionalsByArea: Professional[] = [];
   appointmentTypes: AppointmentType[] = [];
+  selectedProfessional: Professional = {} as Professional;
+
+  //CalendarComponent
+  calendarMonth: Date = new Date();
+  availableDays: number[] = [];
   
   @ViewChild(FormCreateAppointmentComponent)
   private formCreateAppointmentComponent !: FormCreateAppointmentComponent;
@@ -30,6 +37,27 @@ export class CreateAppointmentPageComponent implements OnInit{
   ngOnInit(): void {
     this.loadAreas();
     this.loadAppointmentTypes();
+  }
+
+  onSelectedProfessional(professional: Professional){
+    this.selectedProfessional = professional;
+    this.calendarMonth = new Date();
+    this.loadAvailableDays();
+  }
+
+  onSelectedDate(date: Date){
+    
+  }
+
+  onChangedMonth(date: Date){
+    this.calendarMonth = date;
+    this.loadAvailableDays();
+  }
+
+  loadAvailableDays(){
+    this.professionalService.getAvailableDays(this.selectedProfessional, this.calendarMonth).subscribe({
+      next: days => this.availableDays = days
+    })
   }
 
   searchClients = (text: Observable<string>):Observable<Client[]> => {
