@@ -10,17 +10,22 @@ import { debounceTime, distinctUntilChanged, filter, Observable, switchMap } fro
 import { Client } from '../../../../core/models/client';
 import { CalendarComponent } from "../../components/calendar/calendar";
 import { ProfessionalService } from '../../../../core/services/professional';
+import { TimeComponent } from "../../components/time/time";
+import { Time } from '../../components/time/models/time';
+import { Appointment } from '../../../../core/models/appointment';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-create-appointment-page',
   standalone: true,
-  imports: [FormCreateAppointmentComponent, CalendarComponent],
+  imports: [FormCreateAppointmentComponent, CalendarComponent, TimeComponent],
   templateUrl: './create-appointment-page.html',
   styleUrl: './create-appointment-page.css',
+  providers: [JsonPipe]
 })
 export class CreateAppointmentPageComponent implements OnInit{
 
-  constructor(private areaService: AreaService, private appointmentTypeService: AppointmentTypeService, private clientService: ClientService, private professionalService: ProfessionalService){}
+  constructor(private areaService: AreaService, private appointmentTypeService: AppointmentTypeService, private clientService: ClientService, private professionalService: ProfessionalService, private jsonPipe: JsonPipe){}
 
   areas: Area[] = [];
   professionalsByArea: Professional[] = [];
@@ -30,7 +35,12 @@ export class CreateAppointmentPageComponent implements OnInit{
   //CalendarComponent
   calendarMonth: Date = new Date();
   availableDays: number[] = [];
-  
+  selectedDate !: Date;
+
+  //TimeComponent
+  availableTimes: Time[] = [];
+  selectedTime !: Time;
+
   @ViewChild(FormCreateAppointmentComponent)
   private formCreateAppointmentComponent !: FormCreateAppointmentComponent;
 
@@ -43,20 +53,33 @@ export class CreateAppointmentPageComponent implements OnInit{
     this.selectedProfessional = professional;
     this.calendarMonth = new Date();
     this.loadAvailableDays();
+    this.availableTimes = [];
   }
 
   onSelectedDate(date: Date){
-    
+    this.selectedDate = date;
+    this.loadAvailableTimes();
+  }
+
+  onSelectedTime(time: Time){
+    this.selectedTime = time;
   }
 
   onChangedMonth(date: Date){
     this.calendarMonth = date;
+    this.availableTimes = [];
     this.loadAvailableDays();
   }
 
   loadAvailableDays(){
     this.professionalService.getAvailableDays(this.selectedProfessional, this.calendarMonth).subscribe({
       next: days => this.availableDays = days
+    })
+  }
+
+  loadAvailableTimes(){
+    this.professionalService.getAvailableTimes(this.selectedProfessional, this.selectedDate).subscribe({
+      next: times => this.availableTimes = times
     })
   }
 
@@ -81,6 +104,8 @@ export class CreateAppointmentPageComponent implements OnInit{
         this.professionalsByArea = professionals;
       }
     })
+    this.availableDays = [];
+    this.availableTimes = [];
   }
 
   loadAppointmentTypes() {
@@ -91,6 +116,14 @@ export class CreateAppointmentPageComponent implements OnInit{
 
   createAppointment(){
     this.formCreateAppointmentComponent.submitted = true;
+    let appointment: Appointment = {} as Appointment;
+    
+    appointment = {...this.formCreateAppointmentComponent.appointmentForm.value};
+    appointment.startTime = this.selectedTime.startTime;
+    appointment.endTime = this.selectedTime.endTime;
+    appointment.date = this.selectedDate;
+
+    alert(this.jsonPipe.transform(appointment));
   }
 
 }
