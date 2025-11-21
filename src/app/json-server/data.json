@@ -7,7 +7,8 @@
   "professionals":[
     {"id": 1, "name":"Dr. Andrew Miller", "phone": "+1 202-555-0147", "active": true, "areaId": 1},
     {"id": 2, "name":"Dr. Sarah Johnson", "phone": "+1 202-555-0183", "active": true, "areaId": 2},
-    {"id": 3, "name":"Dr. Mark Peterson", "phone": "+1 202-555-0126", "active": false, "areaId": 2}
+    {"id": 3, "name":"Dr. Mark Peterson", "phone": "+1 202-555-0126", "active": false, "areaId": 2},
+    {"id": 4, "name":"Dr. Sebastian Koch", "phone": "+1 202-555-0112", "active": true, "areaId": 2}
   ],
   "appointment-types":[
     {"id": 1, "type": "Private"},

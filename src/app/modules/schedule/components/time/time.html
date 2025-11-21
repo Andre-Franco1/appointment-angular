@@ -1,0 +1,16 @@
+<div class="text-center">
+    Available times:
+    @for(row of [0,1]; track row){
+    <div class="row">
+        @for(time of times.slice(row*8, (row+1)*8); track $index){
+        <div class="col time" [ngClass]="{
+            'time-off': !time.available,
+            'time-available': time.available,
+            'time-selected': time.startTime == selectedTime.startTime
+        }" (click)="time.available && onSelectedTime(time)">
+            {{time.startTime | time }}
+        </div>
+        }
+    </div>
+    }
+</div>

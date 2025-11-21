@@ -10,7 +10,9 @@
         <div class="col-6 border rounded shadow-sm p-4">
             <app-calendar [calendarMonth]="calendarMonth" [availableDays]="availableDays"
                 (changedMonthEvent)="onChangedMonth($event)"
-                (selectedDateEvent)="onSelectedDate($event)"></app-calendar>
+                (selectedDateEvent)="onSelectedDate($event)">
+            </app-calendar>
+            <app-time [times]="availableTimes" (selectedTimeEvent)="onSelectedTime($event)"></app-time>
             <div id="time"></div>
         </div>
     </div>
