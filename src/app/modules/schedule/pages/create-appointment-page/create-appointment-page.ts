@@ -13,33 +13,40 @@ import { ProfessionalService } from '../../../../core/services/professional';
 import { TimeComponent } from "../../components/time/time";
 import { Time } from '../../components/time/models/time';
 import { Appointment } from '../../../../core/models/appointment';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, DatePipe } from '@angular/common';
+import { ModalComponent } from '../../../../shared/components/modal/modal';
+import { ToastService } from '../../../../core/services/toast';
+import { AppointmentService } from '../../../../core/services/appointment';
 
 @Component({
   selector: 'app-create-appointment-page',
   standalone: true,
-  imports: [FormCreateAppointmentComponent, CalendarComponent, TimeComponent],
+  imports: [FormCreateAppointmentComponent, CalendarComponent, TimeComponent, ModalComponent, DatePipe],
   templateUrl: './create-appointment-page.html',
   styleUrl: './create-appointment-page.css',
   providers: [JsonPipe]
 })
 export class CreateAppointmentPageComponent implements OnInit{
 
-  constructor(private areaService: AreaService, private appointmentTypeService: AppointmentTypeService, private clientService: ClientService, private professionalService: ProfessionalService, private jsonPipe: JsonPipe){}
+  constructor(private areaService: AreaService, private appointmentTypeService: AppointmentTypeService, private clientService: ClientService,
+     private professionalService: ProfessionalService, private jsonPipe: JsonPipe, private toastService: ToastService, private appointmentService: AppointmentService){}
 
   areas: Area[] = [];
   professionalsByArea: Professional[] = [];
   appointmentTypes: AppointmentType[] = [];
   selectedProfessional: Professional = {} as Professional;
+  appointment: Appointment = {} as Appointment;
 
   //CalendarComponent
   calendarMonth: Date = new Date();
   availableDays: number[] = [];
   selectedDate !: Date;
+  calendarError: string = "";
 
   //TimeComponent
   availableTimes: Time[] = [];
   selectedTime !: Time;
+  timeError: string = "";
 
   @ViewChild(FormCreateAppointmentComponent)
   private formCreateAppointmentComponent !: FormCreateAppointmentComponent;
@@ -58,11 +65,13 @@ export class CreateAppointmentPageComponent implements OnInit{
 
   onSelectedDate(date: Date){
     this.selectedDate = date;
+    this.calendarError = "";
     this.loadAvailableTimes();
   }
 
   onSelectedTime(time: Time){
     this.selectedTime = time;
+    this.timeError = "";
   }
 
   onChangedMonth(date: Date){
@@ -114,16 +123,57 @@ export class CreateAppointmentPageComponent implements OnInit{
     })
   }
 
-  createAppointment(){
+  clean(){
+    this.formCreateAppointmentComponent.cleanForm();
+    this.availableTimes = [];
+    this.availableDays = [];
+    this.appointment = {} as Appointment;
+  }
+
+  createAppointment(modalConfirm: ModalComponent){
     this.formCreateAppointmentComponent.submitted = true;
+    this.checkDateAndTimeErrors();
+
+    if(this.isAppointmentValid()){
+      this.appointment = this.createAppointmentObject();
+      
+      modalConfirm.open({size : "lg"}).then( confirm => {
+        if (confirm) {
+          this.appointmentService.save(this.appointment).subscribe({
+            next: () => {
+              this.toastService.show(`Appointment successfully created!`, 'bg-success text-light');
+              this.clean();
+            },
+            error: () => {
+              this.toastService.show('There was an error during appointment creation', 'bg-danger text-light');
+            }
+          });
+        }
+      });
+      
+    }
+  }
+
+  private createAppointmentObject(): Appointment {
     let appointment: Appointment = {} as Appointment;
-    
     appointment = {...this.formCreateAppointmentComponent.appointmentForm.value};
     appointment.startTime = this.selectedTime.startTime;
     appointment.endTime = this.selectedTime.endTime;
     appointment.date = this.selectedDate;
-
-    alert(this.jsonPipe.transform(appointment));
+    return appointment;
   }
 
+  private checkDateAndTimeErrors(): void {
+    if (!this.selectedDate){
+      this.calendarError = "*Select a date!";
+    }
+
+    if (!this.selectedTime){
+      this.timeError = "*Select a time!";
+    }
+  }
+
+  private isAppointmentValid(): boolean{
+    return !!(this.formCreateAppointmentComponent.appointmentForm.valid && this.selectedDate && this.selectedTime);
+  }
 }

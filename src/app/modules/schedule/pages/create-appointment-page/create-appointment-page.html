@@ -8,16 +8,55 @@
                 (selectedProfessionalEvent)="onSelectedProfessional($event)"></app-form-create-appointment>
         </div>
         <div class="col-6 border rounded shadow-sm p-4">
-            <app-calendar [calendarMonth]="calendarMonth" [availableDays]="availableDays"
+            <app-calendar [calendarMonth]="calendarMonth" [availableDays]="availableDays" [error]="calendarError"
                 (changedMonthEvent)="onChangedMonth($event)"
                 (selectedDateEvent)="onSelectedDate($event)">
             </app-calendar>
-            <app-time [times]="availableTimes" (selectedTimeEvent)="onSelectedTime($event)"></app-time>
+            <app-time [times]="availableTimes" [error]="timeError" (selectedTimeEvent)="onSelectedTime($event)"></app-time>
             <div id="time"></div>
         </div>
     </div>
     <div class="d-grid gap-2 mt-2 px-5">
         <button type="button" class="btn btn-primary shadow-sm" type="button" data-bs-toggle="modal"
-            data-bs-target="#confirmModal" (click)="createAppointment()">Create Appointment</button>
+            data-bs-target="#confirmModal" (click)="createAppointment(modalConfirm)">Create Appointment</button>
     </div>
 </div>
+
+<app-modal #modalConfirm [title]="'Confirm this appointment?'">
+    @if(appointment){
+        <ng-container>
+            <div class="alert alert-secondary">
+                        <div class="row">
+                            <div class="col-2">Client:</div>
+                            <div class="col-10 fw-bold">{{appointment.client && appointment.client.name}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">Date:</div>
+                            <div class="col-10 fw-bold">{{appointment.date | date: "MM/dd/yyyy"}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">Time:</div>
+                            <div class="col-10 fw-bold">{{appointment.startTime}}</div>
+                        </div>
+                    </div>
+                    <div class="alert alert-secondary">
+                        <div class="row">
+                            <div class="col-2">Area:</div>
+                            <div class="col-10 fw-bold">{{appointment.area && appointment.area.name}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">Professional</div>
+                            <div class="col-10 fw-bold">{{appointment.professional && appointment.professional.name}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">Type:</div>
+                            <div class="col-10 fw-bold">{{appointment.type && appointment.type.type}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">Comments:</div>
+                            <div class="col-10 fw-bold">{{appointment.comments}}</div>
+                        </div>
+                    </div>
+        </ng-container>
+    }
+</app-modal>

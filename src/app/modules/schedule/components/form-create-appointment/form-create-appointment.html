@@ -33,7 +33,7 @@
 
     <div class="mb-3">
         Choose an appointment Type:
-        <select class="form-select" aria-label="Select an Appointment Type" formControlName="appointmentType">
+        <select class="form-select" aria-label="Select an Appointment Type" formControlName="type">
             @for(appointmentType of appointmentTypes; track appointmentType.id){
                 <option [ngValue]="appointmentType">{{appointmentType.type}}</option>
             }
@@ -52,7 +52,7 @@
         <div class="input-group">
             <input id="typeahead-basic" type="text" class="form-control" formControlName="client" [ngbTypeahead]="searchClients" [resultFormatter]="formatter" [inputFormatter]="formatter"/>
         </div>
-        @if (getSelectedClient().phone) {
+        @if (getSelectedClient()) {
         <div class="text-start">
             <small>Confirm the client's phone number: {{getSelectedClient().phone}}</small>
         </div>
