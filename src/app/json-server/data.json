@@ -1,19 +1,175 @@
 {
-  "areas":[
-    {"id": 1, "name": "General Practitioner"},
-    {"id": 2, "name": "Physical Therapist"},
-    {"id": 3, "name": "Cardiologist"}
+  "areas": [
+    {
+      "id": 1,
+      "name": "General Practitioner"
+    },
+    {
+      "id": 2,
+      "name": "Physical Therapist"
+    },
+    {
+      "id": 3,
+      "name": "Cardiologist"
+    }
   ],
-  "professionals":[
-    {"id": 1, "name":"Dr. Andrew Miller", "phone": "+1 202-555-0147", "active": true, "areaId": 1},
-    {"id": 2, "name":"Dr. Sarah Johnson", "phone": "+1 202-555-0183", "active": true, "areaId": 2},
-    {"id": 3, "name":"Dr. Mark Peterson", "phone": "+1 202-555-0126", "active": false, "areaId": 2},
-    {"id": 4, "name":"Dr. Sebastian Koch", "phone": "+1 202-555-0112", "active": true, "areaId": 2}
+  "appointments": [
+    {
+      "area": {
+        "id": 1,
+        "name": "General Practitioner"
+      },
+      "professional": {
+        "id": 1,
+        "name": "Dr. Andrew Miller",
+        "phone": "+1 202-555-0147",
+        "active": true,
+        "areaId": 1
+      },
+      "type": {
+        "id": 1,
+        "type": "Private"
+      },
+      "client": {
+        "id": 58,
+        "name": "Watts Barker",
+        "dateOfBirth": "2014-01-22",
+        "phone": "(94) 2582-3279"
+      },
+      "comments": "teste",
+      "startTime": "14:30:00",
+      "endTime": "15:00:00",
+      "date": "2025-11-10T03:00:00.000Z",
+      "id": 1
+    },
+    {
+      "area": {
+        "id": 1,
+        "name": "General Practitioner"
+      },
+      "professional": {
+        "id": 1,
+        "name": "Dr. Andrew Miller",
+        "phone": "+1 202-555-0147",
+        "active": true,
+        "areaId": 1
+      },
+      "type": {
+        "id": 1,
+        "type": "Private"
+      },
+      "client": {
+        "id": 58,
+        "name": "Watts Barker",
+        "dateOfBirth": "2014-01-22",
+        "phone": "(94) 2582-3279"
+      },
+      "comments": "teste",
+      "startTime": "09:00:00",
+      "endTime": "09:30:00",
+      "date": "2025-11-17T03:00:00.000Z",
+      "id": 2
+    },
+    {
+      "area": {
+        "id": 1,
+        "name": "General Practitioner"
+      },
+      "professional": {
+        "id": 1,
+        "name": "Dr. Andrew Miller",
+        "phone": "+1 202-555-0147",
+        "active": true,
+        "areaId": 1
+      },
+      "type": {
+        "id": 2,
+        "type": "Insurance SMB"
+      },
+      "client": {
+        "id": 13,
+        "name": "Jimmie Lancaster",
+        "dateOfBirth": "2021-03-15",
+        "phone": "(97) 4403-3243"
+      },
+      "comments": "testes",
+      "startTime": "09:30:00",
+      "endTime": "10:00:00",
+      "date": "2025-11-19T03:00:00.000Z",
+      "id": 3
+    },
+    {
+      "area": {
+        "id": 1,
+        "name": "General Practitioner"
+      },
+      "professional": {
+        "id": 1,
+        "name": "Dr. Andrew Miller",
+        "phone": "+1 202-555-0147",
+        "active": true,
+        "areaId": 1
+      },
+      "type": {
+        "id": 1,
+        "type": "Private"
+      },
+      "client": {
+        "id": 79,
+        "name": "Gates Chavez",
+        "dateOfBirth": "2016-02-29",
+        "phone": "(96) 6585-2654"
+      },
+      "comments": "tsets",
+      "startTime": "09:00:00",
+      "endTime": "09:30:00",
+      "date": "2025-11-11T03:00:00.000Z",
+      "id": 4
+    }
   ],
-  "appointment-types":[
-    {"id": 1, "type": "Private"},
-    {"id": 2, "type": "Insurance SMB"},
-    {"id": 3, "type": "Insurance FHS"}
+  "professionals": [
+    {
+      "id": 1,
+      "name": "Dr. Andrew Miller",
+      "phone": "+1 202-555-0147",
+      "active": true,
+      "areaId": 1
+    },
+    {
+      "id": 2,
+      "name": "Dr. Sarah Johnson",
+      "phone": "+1 202-555-0183",
+      "active": true,
+      "areaId": 2
+    },
+    {
+      "id": 3,
+      "name": "Dr. Mark Peterson",
+      "phone": "+1 202-555-0126",
+      "active": false,
+      "areaId": 2
+    },
+    {
+      "id": 4,
+      "name": "Dr. Sebastian Koch",
+      "phone": "+1 202-555-0112",
+      "active": true,
+      "areaId": 2
+    }
+  ],
+  "appointment-types": [
+    {
+      "id": 1,
+      "type": "Private"
+    },
+    {
+      "id": 2,
+      "type": "Insurance SMB"
+    },
+    {
+      "id": 3,
+      "type": "Insurance FHS"
+    }
   ],
   "clients": [
     {

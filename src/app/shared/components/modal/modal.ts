@@ -18,8 +18,8 @@ export class ModalComponent {
 
   private modalService = inject(NgbModal);
 
-  open() {
-		return this.modalService.open(this.modalContent, { }).result; 
+  open(params: any = {}) {
+		return this.modalService.open(this.modalContent, params).result; 
 	}
 
   

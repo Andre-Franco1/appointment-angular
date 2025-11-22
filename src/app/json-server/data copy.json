@@ -4,6 +4,7 @@
     {"id": 2, "name": "Physical Therapist"},
     {"id": 3, "name": "Cardiologist"}
   ],
+  "appointments":[],
   "professionals":[
     {"id": 1, "name":"Dr. Andrew Miller", "phone": "+1 202-555-0147", "active": true, "areaId": 1},
     {"id": 2, "name":"Dr. Sarah Johnson", "phone": "+1 202-555-0183", "active": true, "areaId": 2},

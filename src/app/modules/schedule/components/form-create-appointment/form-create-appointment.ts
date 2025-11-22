@@ -43,7 +43,7 @@ export class FormCreateAppointmentComponent {
     this.appointmentForm = this.formBuilder.group({
       area: ['', Validators.required],
       professional: [{value: '', disabled: true}, Validators.required],
-      appointmentType: ['', Validators.required],
+      type: ['', Validators.required],
       client: ['', Validators.required],
       comments: ['']
     });
@@ -65,6 +65,11 @@ export class FormCreateAppointmentComponent {
     return this.appointmentForm.controls["client"].value;
   }
 
+  cleanForm(){
+    this.appointmentForm.reset();
+    this.submitted = false;
+  }
+
   get afArea(){
     return this.appointmentForm.get('area');
   }
@@ -74,7 +79,7 @@ export class FormCreateAppointmentComponent {
   }
 
   get afAppointmentType(){
-    return this.appointmentForm.get('appointmentType');
+    return this.appointmentForm.get('type');
   }
 
   get afClient(){
