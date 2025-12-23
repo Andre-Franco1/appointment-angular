@@ -1,15 +1,16 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Area } from '../models/area';
 import { Professional } from '../models/professional';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AreaService {
 
-  baseUrl = "http://localhost:3000/areas";
+  baseUrl = environment.baseUrl + "/areas";
 
   constructor(private http: HttpClient) { }
 

@@ -125,6 +125,34 @@
       "endTime": "09:30:00",
       "date": "2025-11-11T03:00:00.000Z",
       "id": 4
+    },
+    {
+      "area": {
+        "id": 1,
+        "name": "General Practitioner"
+      },
+      "professional": {
+        "id": 1,
+        "name": "Dr. Andrew Miller",
+        "phone": "+1 202-555-0147",
+        "active": true,
+        "areaId": 1
+      },
+      "type": {
+        "id": 1,
+        "type": "Private"
+      },
+      "client": {
+        "id": 34,
+        "name": "Clare Harris",
+        "dateOfBirth": "2024-05-12",
+        "phone": "(83) 5516-3109"
+      },
+      "comments": "",
+      "startTime": "09:30:00",
+      "endTime": "10:00:00",
+      "date": "2025-12-04T03:00:00.000Z",
+      "id": 5
     }
   ],
   "professionals": [
@@ -771,6 +799,12 @@
       "name": "Carole Wynn",
       "dateOfBirth": "2024-05-03",
       "phone": "(81) 4536-2445"
+    },
+    {
+      "id": 101,
+      "name": "teste",
+      "phone": "2222222",
+      "dateOfBirth": "2025-12-04"
     }
   ]
 }
