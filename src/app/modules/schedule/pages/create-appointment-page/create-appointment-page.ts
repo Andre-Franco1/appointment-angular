@@ -6,7 +6,7 @@ import { Professional } from '../../../../core/models/professional';
 import { AppointmentType } from '../../../../core/models/appointment-type';
 import { AppointmentTypeService } from '../../../../core/services/appointment-type';
 import { ClientService } from '../../../../core/services/client';
-import { debounceTime, distinctUntilChanged, filter, Observable, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, Observable, switchMap } from 'rxjs';
 import { Client } from '../../../../core/models/client';
 import { CalendarComponent } from "../../components/calendar/calendar";
 import { ProfessionalService } from '../../../../core/services/professional';
@@ -97,7 +97,8 @@ export class CreateAppointmentPageComponent implements OnInit{
 			debounceTime(200),
 			distinctUntilChanged(),
       filter(term => term.length >= 2),
-			switchMap(term => this.clientService.getClientsByName(term))
+			switchMap(term => this.clientService.getClientsByName(term)),
+      map( page => page.content || [])
 		);
   }
 
@@ -144,8 +145,8 @@ export class CreateAppointmentPageComponent implements OnInit{
               this.toastService.show(`Appointment successfully created!`, 'bg-success text-light');
               this.clean();
             },
-            error: () => {
-              this.toastService.show('There was an error during appointment creation', 'bg-danger text-light');
+            error: (error) => {
+              this.toastService.show(error.error.message, 'bg-danger text-light');
             }
           });
         }
