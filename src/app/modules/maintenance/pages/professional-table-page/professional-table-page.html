@@ -1,0 +1,55 @@
+<div class="container text-center">
+    <div class="display-6">
+        Register Professional:
+    </div>
+    <div class="border rounded shadow-sm p-4">
+        <div class="text-end">
+            <a routerLink="/professional-form" class="btn btn-primary">New</a>
+        </div>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Activity Status</th>
+                <th scope="col">Areas</th>
+                <th scope="col">Delete</th>
+            </tr>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"><input class="form-control" [(ngModel)]="nameFilter" (keyup)="filterName()" placeholder="Filter by name"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (professional of professionalPage.content; track professional.id){
+            <tr>
+                <th scope="row">{{professional.id}}</th>
+                <td><a routerLink="/professional-form/{{professional.id}}">{{professional.name}}</a></td>
+                <td>{{professional.phone}}</td>
+                <td>{{professional.active | active}}</td>
+                <td>{{ getAreaNames(professional.areas) }}</td>
+                <td (click)="delete(professional, modalConfirm)">
+                    <img src="assets/svg/trash3-fill.svg" width="20" height="20" alt="next">
+                </td>
+            </tr>
+            }
+        </tbody>
+        </table>
+
+        <ngb-pagination class="d-flex justify-content-center" [collectionSize]="professionalPage.totalElements" [(page)]="page" [boundaryLinks]="true" (pageChange)="pageChange()" />
+
+    </div>
+</div>
+
+<app-modal #modalConfirm [title]="'Do you want to delete professional?'">
+    @if (selectedProfessional){
+        <ng-container>
+            Name: <span class="fw-bold me-1">{{selectedProfessional.name}}</span>
+        </ng-container>
+    }
+</app-modal>

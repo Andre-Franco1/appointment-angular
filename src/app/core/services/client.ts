@@ -15,7 +15,7 @@ export class ClientService {
   constructor(private http: HttpClient) { }
 
   getClientsPage(clientNameFilter: string, page: number):Observable<Page<Client>>{
-    let url = `${this.baseUrl}?name_like=${clientNameFilter}&_page=${page}&_sort=name`;
+    let url = `${this.baseUrl}?name_like=${clientNameFilter}&page=${page}`;
     return this.http.get<Page<Client>>(url);
   }
 
