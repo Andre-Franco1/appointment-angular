@@ -22,7 +22,7 @@ export class ClientsTablePageComponent implements OnInit {
   constructor(private clientService: ClientService, private toastService: ToastService) { }
 
   clientPage: Page<Client> = {} as Page<Client>;
-  page = 1;
+  page = 0;
 
   nameFilter: string = "";
 
@@ -33,7 +33,9 @@ export class ClientsTablePageComponent implements OnInit {
   }
 
   loadClients() {
-    this.clientService.getClientsPage(this.nameFilter, this.page).subscribe({
+    const backendPage = Math.max(this.page - 1, 0);
+
+    this.clientService.getClientsPage(this.nameFilter, backendPage).subscribe({
       next: response => {
         this.clientPage = response;
       }
